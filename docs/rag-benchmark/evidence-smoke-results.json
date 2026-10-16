@@ -1,0 +1,304 @@
+{
+  "startedAt" : "2026-10-15T01:11:08.373164500Z",
+  "requestMode" : "bounded-json-v1",
+  "model" : "deepseek-chat",
+  "corpusSha256" : "9600fa59e021c5d4d7814e235ca7d21f213cc6fc154ec705611ec78be8a5c80c",
+  "documentId" : "1f6489b5-28be-41fe-97c9-4e513f1f2057",
+  "smoke" : true,
+  "generationEnabled" : false,
+  "webSearchEnabled" : false,
+  "cases" : [ {
+    "label" : {
+      "id" : "Q22",
+      "type" : "paraphrase",
+      "topic" : "index_prefix",
+      "question" : "索引先按租户再按状态最后按时间排，为什么只查最后的时间字段通常不合适？",
+      "evidence" : "只按 created_at 查询通常不能同样利用完整前缀",
+      "relevantChunkNos" : [ 11 ]
+    },
+    "split" : "regression",
+    "candidates" : [ {
+      "chunkId" : "1f6489b5-28be-41fe-97c9-4e513f1f2057-12",
+      "documentId" : "1f6489b5-28be-41fe-97c9-4e513f1f2057",
+      "title" : "rag-benchmark-java.md",
+      "content" : "文档：rag-benchmark-java.md\n章节：独立 Java 后端检索评测资料 > 12 覆盖索引与回表\nInnoDB 二级索引通常包含索引列和主键。所需字段全部在索引中时，覆盖索引可以减少回表。按租户和状态查订单 id 可能由索引覆盖；查大段正文通常仍需通过主键读取整行。更多索引增加写入及空间成本。",
+      "category" : "rag-benchmark-20261014",
+      "chunkNo" : 12,
+      "score" : 0.27124850688101537,
+      "retrievalSource" : "ES_HYBRID_RRF",
+      "url" : null
+    }, {
+      "chunkId" : "1f6489b5-28be-41fe-97c9-4e513f1f2057-11",
+      "documentId" : "1f6489b5-28be-41fe-97c9-4e513f1f2057",
+      "title" : "rag-benchmark-java.md",
+      "content" : "文档：rag-benchmark-java.md\n章节：独立 Java 后端检索评测资料 > 11 联合索引顺序\n示例联合索引按 tenant_id、status、created_at 排序。查询前导列可利用最左前缀，只按 created_at 查询通常不能同样利用完整前缀。应看 EXPLAIN 验证执行计划，不能用 SQL 条件书写顺序判断是否走索引。",
+      "category" : "rag-benchmark-20261014",
+      "chunkNo" : 11,
+      "score" : 0.2234995549959667,
+      "retrievalSource" : "ES_HYBRID_RRF",
+      "url" : null
+    }, {
+      "chunkId" : "1f6489b5-28be-41fe-97c9-4e513f1f2057-1",
+      "documentId" : "1f6489b5-28be-41fe-97c9-4e513f1f2057",
+      "title" : "rag-benchmark-java.md",
+      "content" : "文档：rag-benchmark-java.md\n章节：独立 Java 后端检索评测资料 > 01 相等对象与哈希键\n哈希容器先按哈希值定位桶，再比较键是否相等。两个对象的 equals 判定相等时，hashCode 必须一致；哈希值相同不保证对象相等。键入容器后不应修改参与相等比较的字段。示例订单键只使用不可变订单编号，不使用可变订单状态。",
+      "category" : "rag-benchmark-20261014",
+      "chunkNo" : 1,
+      "score" : 0.2161290322580645,
+      "retrievalSource" : "ES_HYBRID_RRF",
+      "url" : null
+    }, {
+      "chunkId" : "1f6489b5-28be-41fe-97c9-4e513f1f2057-28",
+      "documentId" : "1f6489b5-28be-41fe-97c9-4e513f1f2057",
+      "title" : "rag-benchmark-java.md",
+      "content" : "文档：rag-benchmark-java.md\n章节：独立 Java 后端检索评测资料 > 28 上传分片状态\n示例维护 uploadId、总片数、已收序号、总大小和用户归属，单片上限 2 MiB、总文件上限 40 MiB。分片齐全后按序合并并核对总大小，还可验证哈希。任务索引只在内存时重启后无法可靠续传。",
+      "category" : "rag-benchmark-20261014",
+      "chunkNo" : 28,
+      "score" : 0.149012452,
+      "retrievalSource" : "ES_HYBRID_RRF",
+      "url" : null
+    }, {
+      "chunkId" : "1f6489b5-28be-41fe-97c9-4e513f1f2057-23",
+      "documentId" : "1f6489b5-28be-41fe-97c9-4e513f1f2057",
+      "title" : "rag-benchmark-java.md",
+      "content" : "文档：rag-benchmark-java.md\n章节：独立 Java 后端检索评测资料 > 23 会话上下文存储\n示例问答消息保存在 Redis，过期时间 90 分钟，长期练习成绩保存 MySQL。上下文支持连续提问，成绩支持跨重启查询。key 包含用户和知识域。整体读出再写回消息列表可能丢失并发追加，可改用原子追加。",
+      "category" : "rag-benchmark-20261014",
+      "chunkNo" : 23,
+      "score" : 0.14793539673755657,
+      "retrievalSource" : "ES_HYBRID_RRF",
+      "url" : null
+    }, {
+      "chunkId" : "1f6489b5-28be-41fe-97c9-4e513f1f2057-17",
+      "documentId" : "1f6489b5-28be-41fe-97c9-4e513f1f2057",
+      "title" : "rag-benchmark-java.md",
+      "content" : "文档：rag-benchmark-java.md\n章节：独立 Java 后端检索评测资料 > 17 文档处理租约\n示例条件 UPDATE 在文档为 PROCESSING 且无有效租约时写 owner token，影响行数为 1 才领取成功。每 20 秒续租，示例租约 2 分钟。宕机后续租停止，过期后可重新领取；旧 token 不能更新完成状态。这是逻辑资格，不是长期数据库行锁。",
+      "category" : "rag-benchmark-20261014",
+      "chunkNo" : 17,
+      "score" : 0.10796123801000218,
+      "retrievalSource" : "ES_HYBRID_RRF",
+      "url" : null
+    }, {
+      "chunkId" : "1f6489b5-28be-41fe-97c9-4e513f1f2057-10",
+      "documentId" : "1f6489b5-28be-41fe-97c9-4e513f1f2057",
+      "title" : "rag-benchmark-java.md",
+      "content" : "文档：rag-benchmark-java.md\n章节：独立 Java 后端检索评测资料 > 10 模型评测事务边界\n示例评测先用短事务登记会话编号、requestId 和 PENDING 状态，提交后在事务外等待模型，再用第二个短事务保存结果。重复请求正在处理时返回处理中，完成后重放旧结果。等待模型期间不持有数据库行锁。",
+      "category" : "rag-benchmark-20261014",
+      "chunkNo" : 10,
+      "score" : 0.10565847288888891,
+      "retrievalSource" : "ES_HYBRID_RRF",
+      "url" : null
+    }, {
+      "chunkId" : "1f6489b5-28be-41fe-97c9-4e513f1f2057-13",
+      "documentId" : "1f6489b5-28be-41fe-97c9-4e513f1f2057",
+      "title" : "rag-benchmark-java.md",
+      "content" : "文档：rag-benchmark-java.md\n章节：独立 Java 后端检索评测资料 > 13 一致性读与版本视图\n读已提交通常每次一致性读建立新的 Read View，可重复读通常沿用同一事务首次一致性读的视图。第二次查询是否看到别人的新提交取决于隔离级别及读取方式。加锁读取属于当前读，不能当作快照读解释。",
+      "category" : "rag-benchmark-20261014",
+      "chunkNo" : 13,
+      "score" : 0.07075122315151516,
+      "retrievalSource" : "ES_HYBRID_RRF",
+      "url" : null
+    } ],
+    "selection" : {
+      "status" : "ERROR",
+      "citations" : [ ],
+      "reason" : "MODEL_TIMEOUT"
+    },
+    "verificationMs" : 30078.6498
+  }, {
+    "label" : {
+      "id" : "M03",
+      "type" : "multi",
+      "topic" : "hybrid_pipeline",
+      "question" : "关键词匹配、语义向量和倒数排名融合分别有什么作用，怎样组成检索链路？",
+      "evidenceAnchors" : [ "示例 title 权重 3、content 权重 1", "示例维度 2048，入库和查询模型必须兼容", "标准 RRF 对同一切片累加各路 1/(60+rank)" ],
+      "relevantChunkNos" : [ 20, 21, 22 ]
+    },
+    "split" : "regression",
+    "candidates" : [ {
+      "chunkId" : "1f6489b5-28be-41fe-97c9-4e513f1f2057-22",
+      "documentId" : "1f6489b5-28be-41fe-97c9-4e513f1f2057",
+      "title" : "rag-benchmark-java.md",
+      "content" : "文档：rag-benchmark-java.md\n章节：独立 Java 后端检索评测资料 > 22 倒数排名融合\n标准 RRF 对同一切片累加各路 1/(60+rank)，未被某一路召回的贡献为零。排名融合减少原始分数尺度不同的影响，两路靠前的切片更有优势。另加原始分数补偿就不是纯 RRF，需验证权重是否压过排名贡献。",
+      "category" : "rag-benchmark-20261014",
+      "chunkNo" : 22,
+      "score" : 0.27237843188101535,
+      "retrievalSource" : "ES_HYBRID_RRF",
+      "url" : null
+    }, {
+      "chunkId" : "1f6489b5-28be-41fe-97c9-4e513f1f2057-20",
+      "documentId" : "1f6489b5-28be-41fe-97c9-4e513f1f2057",
+      "title" : "rag-benchmark-java.md",
+      "content" : "文档：rag-benchmark-java.md\n章节：独立 Java 后端检索评测资料 > 20 关键词相关性\nBM25 根据词频、词项稀有程度及文档长度计算相关性，适合精确类名、错误码和方法名。示例 title 权重 3、content 权重 1。IK 中文分词影响词项匹配，但分词不理解整个问题的语义。",
+      "category" : "rag-benchmark-20261014",
+      "chunkNo" : 20,
+      "score" : 0.27156354613108036,
+      "retrievalSource" : "ES_HYBRID_RRF",
+      "url" : null
+    }, {
+      "chunkId" : "1f6489b5-28be-41fe-97c9-4e513f1f2057-21",
+      "documentId" : "1f6489b5-28be-41fe-97c9-4e513f1f2057",
+      "title" : "rag-benchmark-java.md",
+      "content" : "文档：rag-benchmark-java.md\n章节：独立 Java 后端检索评测资料 > 21 语义近邻\n向量检索将问题和切片映射到同一空间，支持不同措辞表达相近含义。示例维度 2048，入库和查询模型必须兼容。KNN 找到最近邻不代表存在足够回答问题的证据，需要额外判断相关性。",
+      "category" : "rag-benchmark-20261014",
+      "chunkNo" : 21,
+      "score" : 0.2527043834959667,
+      "retrievalSource" : "ES_HYBRID_RRF",
+      "url" : null
+    }, {
+      "chunkId" : "1f6489b5-28be-41fe-97c9-4e513f1f2057-16",
+      "documentId" : "1f6489b5-28be-41fe-97c9-4e513f1f2057",
+      "title" : "rag-benchmark-java.md",
+      "content" : "文档：rag-benchmark-java.md\n章节：独立 Java 后端检索评测资料 > 16 发送确认与消费确认\nRabbitMQ publisher confirm 是 broker 对发布的确认，不代表解析完成。消费者手动 ACK 表示应用已完成消费。示例只有切片、向量化和索引发布都完成才 ACK，不能收到发布确认就把文档设为 READY。",
+      "category" : "rag-benchmark-20261014",
+      "chunkNo" : 16,
+      "score" : 0.131308374,
+      "retrievalSource" : "ES_HYBRID_RRF",
+      "url" : null
+    }, {
+      "chunkId" : "1f6489b5-28be-41fe-97c9-4e513f1f2057-26",
+      "documentId" : "1f6489b5-28be-41fe-97c9-4e513f1f2057",
+      "title" : "rag-benchmark-java.md",
+      "content" : "文档：rag-benchmark-java.md\n章节：独立 Java 后端检索评测资料 > 26 无证据与回答生成\n知识助手应判断片段是否足以支持问题，没有依据时返回 NEEDS_SOURCE。非空列表不等于有证据。引用编号存在也不代表内容支持结论。检索错误和生成错误需分别定位。",
+      "category" : "rag-benchmark-20261014",
+      "chunkNo" : 26,
+      "score" : 0.13088190938461539,
+      "retrievalSource" : "ES_HYBRID_RRF",
+      "url" : null
+    }, {
+      "chunkId" : "1f6489b5-28be-41fe-97c9-4e513f1f2057-0",
+      "documentId" : "1f6489b5-28be-41fe-97c9-4e513f1f2057",
+      "title" : "rag-benchmark-java.md",
+      "content" : "文档：rag-benchmark-java.md\n章节：独立 Java 后端检索评测资料\n本资料为检索实验独立编写，没有使用用户已上传文档。下文示例参数仅属于本资料，不代表项目实际配置。每节提供一组明确的检索证据。",
+      "category" : "rag-benchmark-20261014",
+      "chunkNo" : 0,
+      "score" : 0.11972262915151516,
+      "retrievalSource" : "ES_HYBRID_RRF",
+      "url" : null
+    }, {
+      "chunkId" : "1f6489b5-28be-41fe-97c9-4e513f1f2057-19",
+      "documentId" : "1f6489b5-28be-41fe-97c9-4e513f1f2057",
+      "title" : "rag-benchmark-java.md",
+      "content" : "文档：rag-benchmark-java.md\n章节：独立 Java 后端检索评测资料 > 19 段落切分与上下文\n示例先识别标题和段落，同章节短段落合并，超长段落按句子边界递归拆分。每块最大 600 个估算 Token，重叠 60 个估算 Token。重叠缓解断句但带来重复证据；估算预算不是官方 tokenizer 的精确计数。",
+      "category" : "rag-benchmark-20261014",
+      "chunkNo" : 19,
+      "score" : 0.10856903169376866,
+      "retrievalSource" : "ES_HYBRID_RRF",
+      "url" : null
+    }, {
+      "chunkId" : "1f6489b5-28be-41fe-97c9-4e513f1f2057-10",
+      "documentId" : "1f6489b5-28be-41fe-97c9-4e513f1f2057",
+      "title" : "rag-benchmark-java.md",
+      "content" : "文档：rag-benchmark-java.md\n章节：独立 Java 后端检索评测资料 > 10 模型评测事务边界\n示例评测先用短事务登记会话编号、requestId 和 PENDING 状态，提交后在事务外等待模型，再用第二个短事务保存结果。重复请求正在处理时返回处理中，完成后重放旧结果。等待模型期间不持有数据库行锁。",
+      "category" : "rag-benchmark-20261014",
+      "chunkNo" : 10,
+      "score" : 0.10544542095484119,
+      "retrievalSource" : "ES_HYBRID_RRF",
+      "url" : null
+    } ],
+    "selection" : {
+      "status" : "ERROR",
+      "citations" : [ ],
+      "reason" : "MODEL_TIMEOUT"
+    },
+    "verificationMs" : 30001.3313
+  }, {
+    "label" : {
+      "id" : "N04",
+      "type" : "absent",
+      "topic" : "refrigerant",
+      "question" : "空调制冷剂 R32 和 R410A 的物理性质有什么区别？",
+      "evidence" : "Not covered by the self-authored source.",
+      "relevantChunkNos" : [ ]
+    },
+    "split" : "regression",
+    "candidates" : [ {
+      "chunkId" : "1f6489b5-28be-41fe-97c9-4e513f1f2057-14",
+      "documentId" : "1f6489b5-28be-41fe-97c9-4e513f1f2057",
+      "title" : "rag-benchmark-java.md",
+      "content" : "文档：rag-benchmark-java.md\n章节：独立 Java 后端检索评测资料 > 14 三类数据库日志\nundo 支持回滚和历史版本读取，redo 帮助崩溃恢复页修改，binlog 用于复制及恢复。撤销事务涉及 undo，恢复页变更涉及 redo，把变化传给副本涉及 binlog。它们各有职责，不是同一份日志的不同名字。",
+      "category" : "rag-benchmark-20261014",
+      "chunkNo" : 14,
+      "score" : 0.07539483075763126,
+      "retrievalSource" : "ES_HYBRID_RRF",
+      "url" : null
+    }, {
+      "chunkId" : "1f6489b5-28be-41fe-97c9-4e513f1f2057-26",
+      "documentId" : "1f6489b5-28be-41fe-97c9-4e513f1f2057",
+      "title" : "rag-benchmark-java.md",
+      "content" : "文档：rag-benchmark-java.md\n章节：独立 Java 后端检索评测资料 > 26 无证据与回答生成\n知识助手应判断片段是否足以支持问题，没有依据时返回 NEEDS_SOURCE。非空列表不等于有证据。引用编号存在也不代表内容支持结论。检索错误和生成错误需分别定位。",
+      "category" : "rag-benchmark-20261014",
+      "chunkNo" : 26,
+      "score" : 0.07223874262295082,
+      "retrievalSource" : "ES_HYBRID_RRF",
+      "url" : null
+    }, {
+      "chunkId" : "1f6489b5-28be-41fe-97c9-4e513f1f2057-22",
+      "documentId" : "1f6489b5-28be-41fe-97c9-4e513f1f2057",
+      "title" : "rag-benchmark-java.md",
+      "content" : "文档：rag-benchmark-java.md\n章节：独立 Java 后端检索评测资料 > 22 倒数排名融合\n标准 RRF 对同一切片累加各路 1/(60+rank)，未被某一路召回的贡献为零。排名融合减少原始分数尺度不同的影响，两路靠前的切片更有优势。另加原始分数补偿就不是纯 RRF，需验证权重是否压过排名贡献。",
+      "category" : "rag-benchmark-20261014",
+      "chunkNo" : 22,
+      "score" : 0.07075009851183969,
+      "retrievalSource" : "ES_HYBRID_RRF",
+      "url" : null
+    }, {
+      "chunkId" : "1f6489b5-28be-41fe-97c9-4e513f1f2057-5",
+      "documentId" : "1f6489b5-28be-41fe-97c9-4e513f1f2057",
+      "title" : "rag-benchmark-java.md",
+      "content" : "文档：rag-benchmark-java.md\n章节：独立 Java 后端检索评测资料 > 05 比较交换与版本号\nCAS 比较当前值和预期值，再决定是否更新。值从 A 变成 B 又变回 A，单纯比较当前值会漏掉中间变化，即 ABA 问题。可以把版本号和数值一起比较。高争用导致反复自旋重试，消耗 CPU。",
+      "category" : "rag-benchmark-20261014",
+      "chunkNo" : 5,
+      "score" : 0.06838918157857735,
+      "retrievalSource" : "ES_HYBRID_RRF",
+      "url" : null
+    }, {
+      "chunkId" : "1f6489b5-28be-41fe-97c9-4e513f1f2057-13",
+      "documentId" : "1f6489b5-28be-41fe-97c9-4e513f1f2057",
+      "title" : "rag-benchmark-java.md",
+      "content" : "文档：rag-benchmark-java.md\n章节：独立 Java 后端检索评测资料 > 13 一致性读与版本视图\n读已提交通常每次一致性读建立新的 Read View，可重复读通常沿用同一事务首次一致性读的视图。第二次查询是否看到别人的新提交取决于隔离级别及读取方式。加锁读取属于当前读，不能当作快照读解释。",
+      "category" : "rag-benchmark-20261014",
+      "chunkNo" : 13,
+      "score" : 0.06753505787162838,
+      "retrievalSource" : "ES_HYBRID_RRF",
+      "url" : null
+    }, {
+      "chunkId" : "1f6489b5-28be-41fe-97c9-4e513f1f2057-16",
+      "documentId" : "1f6489b5-28be-41fe-97c9-4e513f1f2057",
+      "title" : "rag-benchmark-java.md",
+      "content" : "文档：rag-benchmark-java.md\n章节：独立 Java 后端检索评测资料 > 16 发送确认与消费确认\nRabbitMQ publisher confirm 是 broker 对发布的确认，不代表解析完成。消费者手动 ACK 表示应用已完成消费。示例只有切片、向量化和索引发布都完成才 ACK，不能收到发布确认就把文档设为 READY。",
+      "category" : "rag-benchmark-20261014",
+      "chunkNo" : 16,
+      "score" : 0.06748704538992747,
+      "retrievalSource" : "ES_HYBRID_RRF",
+      "url" : null
+    }, {
+      "chunkId" : "1f6489b5-28be-41fe-97c9-4e513f1f2057-0",
+      "documentId" : "1f6489b5-28be-41fe-97c9-4e513f1f2057",
+      "title" : "rag-benchmark-java.md",
+      "content" : "文档：rag-benchmark-java.md\n章节：独立 Java 后端检索评测资料\n本资料为检索实验独立编写，没有使用用户已上传文档。下文示例参数仅属于本资料，不代表项目实际配置。每节提供一组明确的检索证据。",
+      "category" : "rag-benchmark-20261014",
+      "chunkNo" : 0,
+      "score" : 0.06502997592259949,
+      "retrievalSource" : "ES_HYBRID_RRF",
+      "url" : null
+    }, {
+      "chunkId" : "1f6489b5-28be-41fe-97c9-4e513f1f2057-11",
+      "documentId" : "1f6489b5-28be-41fe-97c9-4e513f1f2057",
+      "title" : "rag-benchmark-java.md",
+      "content" : "文档：rag-benchmark-java.md\n章节：独立 Java 后端检索评测资料 > 11 联合索引顺序\n示例联合索引按 tenant_id、status、created_at 排序。查询前导列可利用最左前缀，只按 created_at 查询通常不能同样利用完整前缀。应看 EXPLAIN 验证执行计划，不能用 SQL 条件书写顺序判断是否走索引。",
+      "category" : "rag-benchmark-20261014",
+      "chunkNo" : 11,
+      "score" : 0.048280715,
+      "retrievalSource" : "ES_HYBRID_RRF",
+      "url" : null
+    } ],
+    "selection" : {
+      "status" : "ERROR",
+      "citations" : [ ],
+      "reason" : "MODEL_HTTP_503"
+    },
+    "verificationMs" : 359.3897
+  } ],
+  "completedAt" : "2026-10-15T01:12:08.880103900Z",
+  "corpusUnchanged" : true
+}

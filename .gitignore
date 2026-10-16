@@ -1,0 +1,9 @@
+target/
+target-claim-check/
+target-rag-benchmark/
+target-evidence-check/
+.idea/
+*.iml
+*.log
+.env
+data/

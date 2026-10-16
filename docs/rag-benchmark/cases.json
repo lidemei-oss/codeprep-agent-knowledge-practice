@@ -1,0 +1,692 @@
+{
+  "name": "Self-authored Java backend retrieval evaluation: 28 topics, 60 answerable queries, 8 absent-topic controls",
+  "annotationMethod": "Self-authored source and assistant-reviewed evidence anchors fixed before retrieval; not an independently validated benchmark",
+  "cases": [
+    {
+      "id": "Q01",
+      "type": "exact",
+      "topic": "hash_contract",
+      "question": "equals 与 hashCode 的一致性要求是什么？",
+      "evidence": "两个对象的 equals 判定相等时，hashCode 必须一致",
+      "relevantChunkNos": [
+        1
+      ]
+    },
+    {
+      "id": "Q02",
+      "type": "paraphrase",
+      "topic": "hash_contract",
+      "question": "订单状态改了以后，用同一个订单键为什么可能再也查不到哈希容器中的记录？",
+      "evidence": "键入容器后不应修改参与相等比较的字段",
+      "relevantChunkNos": [
+        1
+      ]
+    },
+    {
+      "id": "Q03",
+      "type": "exact",
+      "topic": "hash_tree",
+      "question": "HashMap 链表树化需要满足哪些长度和容量条件？",
+      "evidence": "链表节点达到 8 个且数组容量至少 64",
+      "relevantChunkNos": [
+        2
+      ]
+    },
+    {
+      "id": "Q04",
+      "type": "paraphrase",
+      "topic": "hash_tree",
+      "question": "很多键挤在同一个桶中，什么时候才会改用树，为什么数组太小时先扩大数组？",
+      "evidence": "容量不足时优先扩容以分散冲突",
+      "relevantChunkNos": [
+        2
+      ]
+    },
+    {
+      "id": "Q05",
+      "type": "exact",
+      "topic": "concurrent_map",
+      "question": "ConcurrentHashMap 能保证先 get 再判断再 put 的原子性吗？",
+      "evidence": "先读取再判断再写入不会自动成为一个原子整体",
+      "relevantChunkNos": [
+        3
+      ]
+    },
+    {
+      "id": "Q06",
+      "type": "paraphrase",
+      "topic": "concurrent_map",
+      "question": "使用线程安全字典后，扣库存和新增订单两步为什么仍需要业务层协调？",
+      "evidence": "库存扣减和新增订单两份记录",
+      "relevantChunkNos": [
+        3
+      ]
+    },
+    {
+      "id": "Q07",
+      "type": "exact",
+      "topic": "volatile",
+      "question": "volatile 是否保证 count++ 原子性，应该使用什么计数方式？",
+      "evidence": "volatile 不能使 count++ 成为原子操作",
+      "relevantChunkNos": [
+        4
+      ]
+    },
+    {
+      "id": "Q08",
+      "type": "paraphrase",
+      "topic": "volatile",
+      "question": "计数器对其他线程可见，多人同时加一为什么还会漏计数？",
+      "evidence": "自增包含读取、计算和写回",
+      "relevantChunkNos": [
+        4
+      ]
+    },
+    {
+      "id": "Q09",
+      "type": "exact",
+      "topic": "CAS_ABA",
+      "question": "CAS 的 ABA 问题如何用版本号解决？",
+      "evidence": "可以把版本号和数值一起比较",
+      "relevantChunkNos": [
+        5
+      ]
+    },
+    {
+      "id": "Q10",
+      "type": "paraphrase",
+      "topic": "CAS_ABA",
+      "question": "数值先变了又变回原样，比较交换怎样识别它其实被修改过？",
+      "evidence": "值从 A 变成 B 又变回 A",
+      "relevantChunkNos": [
+        5
+      ]
+    },
+    {
+      "id": "Q11",
+      "type": "exact",
+      "topic": "executor_order",
+      "question": "资料中核心线程 4、最大 8、队列 16 的线程池按什么顺序接收任务？",
+      "evidence": "示例线程池核心线程 4 个、最大线程 8 个、队列容量 16",
+      "relevantChunkNos": [
+        6
+      ]
+    },
+    {
+      "id": "Q12",
+      "type": "paraphrase",
+      "topic": "executor_order",
+      "question": "任务增多时，执行器是立即补到八个工作线程，还是先排队？",
+      "evidence": "队列满才扩张到最大数量",
+      "relevantChunkNos": [
+        6
+      ]
+    },
+    {
+      "id": "Q13",
+      "type": "exact",
+      "topic": "CallerRuns",
+      "question": "CallerRunsPolicy 由谁执行被拒绝任务，对 HTTP 请求有什么影响？",
+      "evidence": "让提交任务的调用线程执行任务",
+      "relevantChunkNos": [
+        7
+      ]
+    },
+    {
+      "id": "Q14",
+      "type": "paraphrase",
+      "topic": "CallerRuns",
+      "question": "线程池塞不下新工作时让提交者亲自做，为什么能减慢提交速度？",
+      "evidence": "拖慢提交速度，形成一定背压",
+      "relevantChunkNos": [
+        7
+      ]
+    },
+    {
+      "id": "Q15",
+      "type": "exact",
+      "topic": "async_proxy",
+      "question": "@Async 同类内部调用为何可能不生效，怎样调整？",
+      "evidence": "同一个对象直接调用自己的异步方法可能绕过代理",
+      "relevantChunkNos": [
+        8
+      ]
+    },
+    {
+      "id": "Q16",
+      "type": "paraphrase",
+      "topic": "async_proxy",
+      "question": "同一个服务里的方法直接调用另一个异步方法，为何还在原线程运行？",
+      "evidence": "因此仍在当前线程执行",
+      "relevantChunkNos": [
+        8
+      ]
+    },
+    {
+      "id": "Q17",
+      "type": "exact",
+      "topic": "transaction_rollback",
+      "question": "Spring 默认事务对哪些异常回滚，捕获异常有什么影响？",
+      "evidence": "默认声明式事务通常对 RuntimeException 和 Error 回滚",
+      "relevantChunkNos": [
+        9
+      ]
+    },
+    {
+      "id": "Q18",
+      "type": "paraphrase",
+      "topic": "transaction_rollback",
+      "question": "数据库操作出错后被业务方法吞掉，为什么前面的写入可能还是提交了？",
+      "evidence": "捕获异常后不重新抛出或标记回滚，事务可能仍提交",
+      "relevantChunkNos": [
+        9
+      ]
+    },
+    {
+      "id": "Q19",
+      "type": "exact",
+      "topic": "evaluation_transaction",
+      "question": "模型评测中的 requestId 和 PENDING 如何配合短事务防止重复提交？",
+      "evidence": "等待模型期间不持有数据库行锁",
+      "relevantChunkNos": [
+        10
+      ]
+    },
+    {
+      "id": "Q20",
+      "type": "paraphrase",
+      "topic": "evaluation_transaction",
+      "question": "等待外部评分几十秒，怎样既不长期占行锁，又让重复请求得到同一份结果？",
+      "evidence": "重复请求正在处理时返回处理中，完成后重放旧结果",
+      "relevantChunkNos": [
+        10
+      ]
+    },
+    {
+      "id": "Q21",
+      "type": "exact",
+      "topic": "index_prefix",
+      "question": "tenant_id、status、created_at 联合索引怎样使用最左前缀？",
+      "evidence": "查询前导列可利用最左前缀",
+      "relevantChunkNos": [
+        11
+      ]
+    },
+    {
+      "id": "Q22",
+      "type": "paraphrase",
+      "topic": "index_prefix",
+      "question": "索引先按租户再按状态最后按时间排，为什么只查最后的时间字段通常不合适？",
+      "evidence": "只按 created_at 查询通常不能同样利用完整前缀",
+      "relevantChunkNos": [
+        11
+      ]
+    },
+    {
+      "id": "Q23",
+      "type": "exact",
+      "topic": "covering_index",
+      "question": "覆盖索引为什么能减少 InnoDB 回表？",
+      "evidence": "所需字段全部在索引中时，覆盖索引可以减少回表",
+      "relevantChunkNos": [
+        12
+      ]
+    },
+    {
+      "id": "Q24",
+      "type": "paraphrase",
+      "topic": "covering_index",
+      "question": "只取订单编号和取整段订单正文，为什么查索引后的读取成本不同？",
+      "evidence": "查大段正文通常仍需通过主键读取整行",
+      "relevantChunkNos": [
+        12
+      ]
+    },
+    {
+      "id": "Q25",
+      "type": "exact",
+      "topic": "read_view",
+      "question": "读已提交和可重复读如何建立 Read View？",
+      "evidence": "读已提交通常每次一致性读建立新的 Read View",
+      "relevantChunkNos": [
+        13
+      ]
+    },
+    {
+      "id": "Q26",
+      "type": "paraphrase",
+      "topic": "read_view",
+      "question": "事务内再次读取时，是继续看第一次的快照，还是能看见别人的新提交？",
+      "evidence": "可重复读通常沿用同一事务首次一致性读的视图",
+      "relevantChunkNos": [
+        13
+      ]
+    },
+    {
+      "id": "Q27",
+      "type": "exact",
+      "topic": "database_logs",
+      "question": "undo、redo、binlog 分别负责什么？",
+      "evidence": "undo 支持回滚和历史版本读取",
+      "relevantChunkNos": [
+        14
+      ]
+    },
+    {
+      "id": "Q28",
+      "type": "paraphrase",
+      "topic": "database_logs",
+      "question": "撤销事务、宕机恢复和把变化复制给另一台数据库，各依赖哪类日志？",
+      "evidence": "把变化传给副本涉及 binlog",
+      "relevantChunkNos": [
+        14
+      ]
+    },
+    {
+      "id": "Q29",
+      "type": "exact",
+      "topic": "outbox",
+      "question": "MySQL Outbox 怎样恢复数据库已提交而 MQ 未发送的任务？",
+      "evidence": "示例上传在同一个数据库事务插入文档记录和 Outbox 事件",
+      "relevantChunkNos": [
+        15
+      ]
+    },
+    {
+      "id": "Q30",
+      "type": "paraphrase",
+      "topic": "outbox",
+      "question": "文件登记成功但消息没送出去，怎样用数据库中的待发事件补发？",
+      "evidence": "失败则保留并重试",
+      "relevantChunkNos": [
+        15
+      ]
+    },
+    {
+      "id": "Q31",
+      "type": "exact",
+      "topic": "RabbitMQ_confirm_ack",
+      "question": "RabbitMQ publisher confirm 与消费者手动 ACK 的含义有何区别？",
+      "evidence": "消费者手动 ACK 表示应用已完成消费",
+      "relevantChunkNos": [
+        16
+      ]
+    },
+    {
+      "id": "Q32",
+      "type": "paraphrase",
+      "topic": "RabbitMQ_confirm_ack",
+      "question": "消息服务器说收到了任务，为什么不能据此认为文件已经处理完成？",
+      "evidence": "不代表解析完成",
+      "relevantChunkNos": [
+        16
+      ]
+    },
+    {
+      "id": "Q33",
+      "type": "exact",
+      "topic": "lease",
+      "question": "示例消费者如何用 owner token、条件 UPDATE 和租约领取文档？",
+      "evidence": "影响行数为 1 才领取成功",
+      "relevantChunkNos": [
+        17
+      ]
+    },
+    {
+      "id": "Q34",
+      "type": "paraphrase",
+      "topic": "lease",
+      "question": "处理者突然退出后，怎么让别人接手，同时禁止过期的旧处理者更新完成状态？",
+      "evidence": "宕机后续租停止，过期后可重新领取",
+      "relevantChunkNos": [
+        17
+      ]
+    },
+    {
+      "id": "Q35",
+      "type": "exact",
+      "topic": "retry_dlq",
+      "question": "示例最多重试多少次，等待间隔是多少，死信队列有什么用途？",
+      "evidence": "示例最多尝试 4 次，失败间隔为 2 秒、4 秒、8 秒",
+      "relevantChunkNos": [
+        18
+      ]
+    },
+    {
+      "id": "Q36",
+      "type": "paraphrase",
+      "topic": "retry_dlq",
+      "question": "任务反复失败后被移到另一条队列，这代表成功了吗，后续该怎么处理？",
+      "evidence": "死信供分析和人工重放，不意味着处理成功",
+      "relevantChunkNos": [
+        18
+      ]
+    },
+    {
+      "id": "Q37",
+      "type": "exact",
+      "topic": "chunking",
+      "question": "资料中的结构切块预算和重叠 Token 数是多少？",
+      "evidence": "每块最大 600 个估算 Token，重叠 60 个估算 Token",
+      "relevantChunkNos": [
+        19
+      ]
+    },
+    {
+      "id": "Q38",
+      "type": "paraphrase",
+      "topic": "chunking",
+      "question": "长段落拆开时怎样避免边界断句，又为什么相邻段会重复一些内容？",
+      "evidence": "重叠缓解断句但带来重复证据",
+      "relevantChunkNos": [
+        19
+      ]
+    },
+    {
+      "id": "Q39",
+      "type": "exact",
+      "topic": "BM25",
+      "question": "BM25 相关性受什么影响，示例 title 和 content 的权重是多少？",
+      "evidence": "示例 title 权重 3、content 权重 1",
+      "relevantChunkNos": [
+        20
+      ]
+    },
+    {
+      "id": "Q40",
+      "type": "paraphrase",
+      "topic": "BM25",
+      "question": "按词匹配技术类名时，词的稀有程度和文章长度为何会影响结果顺序？",
+      "evidence": "BM25 根据词频、词项稀有程度及文档长度计算相关性",
+      "relevantChunkNos": [
+        20
+      ]
+    },
+    {
+      "id": "Q41",
+      "type": "exact",
+      "topic": "KNN",
+      "question": "2048 维 KNN 查询为什么需要与入库模型兼容？",
+      "evidence": "示例维度 2048，入库和查询模型必须兼容",
+      "relevantChunkNos": [
+        21
+      ]
+    },
+    {
+      "id": "Q42",
+      "type": "paraphrase",
+      "topic": "KNN",
+      "question": "问题和段落用不同词表达同一含义，检索器怎样用相似位置找到它们？",
+      "evidence": "向量检索将问题和切片映射到同一空间",
+      "relevantChunkNos": [
+        21
+      ]
+    },
+    {
+      "id": "Q43",
+      "type": "exact",
+      "topic": "RRF",
+      "question": "标准 RRF 怎样累计排名，没被某一路召回怎么办？",
+      "evidence": "标准 RRF 对同一切片累加各路 1/(60+rank)",
+      "relevantChunkNos": [
+        22
+      ]
+    },
+    {
+      "id": "Q44",
+      "type": "paraphrase",
+      "topic": "RRF",
+      "question": "两套搜索打分尺度不同，怎样用名次而不是原始得分合并结果？",
+      "evidence": "排名融合减少原始分数尺度不同的影响",
+      "relevantChunkNos": [
+        22
+      ]
+    },
+    {
+      "id": "Q45",
+      "type": "exact",
+      "topic": "Redis_context",
+      "question": "示例 Redis 会话保存多久，为什么成绩另外放 MySQL？",
+      "evidence": "过期时间 90 分钟，长期练习成绩保存 MySQL",
+      "relevantChunkNos": [
+        23
+      ]
+    },
+    {
+      "id": "Q46",
+      "type": "paraphrase",
+      "topic": "Redis_context",
+      "question": "聊天记录可以过期，但用户做题成绩重启后仍要查到，应该怎样分工存储？",
+      "evidence": "上下文支持连续提问，成绩支持跨重启查询",
+      "relevantChunkNos": [
+        23
+      ]
+    },
+    {
+      "id": "Q47",
+      "type": "exact",
+      "topic": "Lua_rate",
+      "question": "示例限流的次数和窗口是什么，Lua 如何解决 INCR 与 EXPIRE 间的失败？",
+      "evidence": "示例每用户每 60 秒最多 20 次请求",
+      "relevantChunkNos": [
+        24
+      ]
+    },
+    {
+      "id": "Q48",
+      "type": "paraphrase",
+      "topic": "Lua_rate",
+      "question": "增加请求次数成功却没设过期，怎样把计数和首次到期设置一次完成？",
+      "evidence": "用 Lua 原子执行计数、首次设置过期和放行判断",
+      "relevantChunkNos": [
+        24
+      ]
+    },
+    {
+      "id": "Q49",
+      "type": "exact",
+      "topic": "streaming",
+      "question": "SSE 与 WebSocket 在通信方向和增量事件上有什么区别？",
+      "evidence": "SSE 在 HTTP 上从服务端单向发送事件",
+      "relevantChunkNos": [
+        25
+      ]
+    },
+    {
+      "id": "Q50",
+      "type": "paraphrase",
+      "topic": "streaming",
+      "question": "只需逐段收文字与双方持续交换消息，分别选什么连接协议？",
+      "evidence": "WebSocket 握手后建立双向连接",
+      "relevantChunkNos": [
+        25
+      ]
+    },
+    {
+      "id": "Q51",
+      "type": "exact",
+      "topic": "evidence",
+      "question": "NEEDS_SOURCE 与引用编号检查怎样体现证据不足？",
+      "evidence": "引用编号存在也不代表内容支持结论",
+      "relevantChunkNos": [
+        26
+      ]
+    },
+    {
+      "id": "Q52",
+      "type": "paraphrase",
+      "topic": "evidence",
+      "question": "找到了几个段落就可以回答吗，为什么编号正确的引用仍可能不支持结论？",
+      "evidence": "非空列表不等于有证据",
+      "relevantChunkNos": [
+        26
+      ]
+    },
+    {
+      "id": "Q53",
+      "type": "exact",
+      "topic": "JWT_scope",
+      "question": "JWT 验签和组织标签过滤分别解决什么问题？",
+      "evidence": "JWT 验签与过期检查识别身份",
+      "relevantChunkNos": [
+        27
+      ]
+    },
+    {
+      "id": "Q54",
+      "type": "paraphrase",
+      "topic": "JWT_scope",
+      "question": "用户已经登录，为什么搜索还要先限制他所属团队的资料范围？",
+      "evidence": "标签进入索引过滤条件，在召回前限制范围",
+      "relevantChunkNos": [
+        27
+      ]
+    },
+    {
+      "id": "Q55",
+      "type": "exact",
+      "topic": "upload_chunks",
+      "question": "资料中的分片上传需维护什么状态，单片和总文件上限是多少？",
+      "evidence": "单片上限 2 MiB、总文件上限 40 MiB",
+      "relevantChunkNos": [
+        28
+      ]
+    },
+    {
+      "id": "Q56",
+      "type": "paraphrase",
+      "topic": "upload_chunks",
+      "question": "文件拆成小块传输后，服务器怎样知道都收齐了，为什么进程重启可能不能继续？",
+      "evidence": "任务索引只在内存时重启后无法可靠续传",
+      "relevantChunkNos": [
+        28
+      ]
+    },
+    {
+      "id": "M01",
+      "type": "multi",
+      "topic": "outbox_and_ack",
+      "question": "从文档登记到消息发送再到消费者完成，Outbox 和两种确认各在哪一步保证什么？",
+      "evidenceAnchors": [
+        "示例上传在同一个数据库事务插入文档记录和 Outbox 事件",
+        "消费者手动 ACK 表示应用已完成消费"
+      ],
+      "relevantChunkNos": [
+        15,
+        16
+      ]
+    },
+    {
+      "id": "M02",
+      "type": "multi",
+      "topic": "lease_and_retry",
+      "question": "消费者宕机如何允许接管，任务连续处理失败又怎样重试和进入死信？",
+      "evidenceAnchors": [
+        "影响行数为 1 才领取成功",
+        "示例最多尝试 4 次，失败间隔为 2 秒、4 秒、8 秒"
+      ],
+      "relevantChunkNos": [
+        17,
+        18
+      ]
+    },
+    {
+      "id": "M03",
+      "type": "multi",
+      "topic": "hybrid_pipeline",
+      "question": "关键词匹配、语义向量和倒数排名融合分别有什么作用，怎样组成检索链路？",
+      "evidenceAnchors": [
+        "示例 title 权重 3、content 权重 1",
+        "示例维度 2048，入库和查询模型必须兼容",
+        "标准 RRF 对同一切片累加各路 1/(60+rank)"
+      ],
+      "relevantChunkNos": [
+        20,
+        21,
+        22
+      ]
+    },
+    {
+      "id": "M04",
+      "type": "multi",
+      "topic": "evaluation_and_scope",
+      "question": "用户提交模型评测时，如何限制资料访问范围并避免等待模型期间占锁和重复提交？",
+      "evidenceAnchors": [
+        "等待模型期间不持有数据库行锁",
+        "标签进入索引过滤条件，在召回前限制范围"
+      ],
+      "relevantChunkNos": [
+        10,
+        27
+      ]
+    },
+    {
+      "id": "N01",
+      "type": "absent",
+      "topic": "PostgreSQL",
+      "question": "PostgreSQL VACUUM 和 autovacuum 如何清理死元组？",
+      "evidence": "Not covered by the self-authored source.",
+      "relevantChunkNos": []
+    },
+    {
+      "id": "N02",
+      "type": "absent",
+      "topic": "Rust",
+      "question": "Rust 返回借用引用时应怎样声明生命周期参数？",
+      "evidence": "Not covered by the self-authored source.",
+      "relevantChunkNos": []
+    },
+    {
+      "id": "N03",
+      "type": "absent",
+      "topic": "Kubernetes",
+      "question": "Kubernetes HPA 如何计算需要的副本数？",
+      "evidence": "Not covered by the self-authored source.",
+      "relevantChunkNos": []
+    },
+    {
+      "id": "N04",
+      "type": "absent",
+      "topic": "refrigerant",
+      "question": "空调制冷剂 R32 和 R410A 的物理性质有什么区别？",
+      "evidence": "Not covered by the self-authored source.",
+      "relevantChunkNos": []
+    },
+    {
+      "id": "N05",
+      "type": "absent",
+      "topic": "battery",
+      "question": "磷酸铁锂和三元锂电池化学体系及能量密度有什么区别？",
+      "evidence": "Not covered by the self-authored source.",
+      "relevantChunkNos": []
+    },
+    {
+      "id": "N06",
+      "type": "absent",
+      "topic": "virtual_threads",
+      "question": "Java 21 虚拟线程的 carrier thread 和 pinning 如何工作？",
+      "evidence": "The source only describes conventional executors.",
+      "relevantChunkNos": []
+    },
+    {
+      "id": "N07",
+      "type": "absent",
+      "topic": "G1",
+      "question": "G1 的 remembered set 与 SATB 写屏障如何协作？",
+      "evidence": "No garbage collector internals in the source.",
+      "relevantChunkNos": []
+    },
+    {
+      "id": "N08",
+      "type": "absent",
+      "topic": "MyBatis_pagination",
+      "question": "MyBatis-Plus PaginationInnerInterceptor 如何配置多数据库分页？",
+      "evidence": "No MyBatis-Plus interceptor configuration in the source.",
+      "relevantChunkNos": []
+    }
+  ],
+  "corpusSha256": "9600fa59e021c5d4d7814e235ca7d21f213cc6fc154ec705611ec78be8a5c80c",
+  "documentId": "1f6489b5-28be-41fe-97c9-4e513f1f2057",
+  "orgTag": "rag-benchmark",
+  "category": "rag-benchmark-20261014"
+}

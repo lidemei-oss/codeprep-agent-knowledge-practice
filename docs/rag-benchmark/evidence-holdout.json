@@ -1,0 +1,21 @@
+{
+  "annotationMethod": "New self-authored holdout questions and source anchors fixed before live evidence evaluation; not independently reviewed",
+  "cases": [
+    {"id":"H01","type":"paraphrase","topic":"executor_capacity","question":"示例已有四个工作线程且队列已经放了十六个任务，这时又来一个任务，线程池下一步做什么？","evidence":"队列满才扩张到最大数量"},
+    {"id":"H02","type":"exact","topic":"shutdown_rejection","question":"线程池关闭后，CallerRunsPolicy 是否仍保证新提交的任务执行？","evidence":"该策略不保证线程池关闭后仍执行新任务"},
+    {"id":"H03","type":"exact","topic":"checked_exception","question":"事务方法抛受检异常时，默认是否像 RuntimeException 一样回滚？","evidence":"受检异常是否回滚需配置"},
+    {"id":"H04","type":"paraphrase","topic":"outbox_duplicate","question":"发布者已收到确认，还没更新数据库事件状态就退出，再次发送会不会重复，谁负责应对？","evidence":"收到发送确认但尚未更新事件状态时可能重复发送，需要消费端幂等"},
+    {"id":"H05","type":"exact","topic":"lease_parameters","question":"本测试资料示例中的处理租约多长、多久续租，这是否等于一直持有行锁？","evidence":"每 20 秒续租，示例租约 2 分钟"},
+    {"id":"H06","type":"paraphrase","topic":"ready_publication","question":"broker 已经收到了消息，但正文还没转成向量，为什么此时不能向用户宣布资料可检索？","evidence":"不能收到发布确认就把文档设为 READY"},
+    {"id":"H07","type":"paraphrase","topic":"fixed_window_boundary","question":"把限流计数步骤原子化以后，窗口交界处的突发是否就被消除了？","evidence":"固定窗口有边界突发，不等于平滑令牌桶"},
+    {"id":"H08","type":"paraphrase","topic":"chat_lost_update","question":"两个请求都先读出整份聊天列表，再各自追加并覆盖写回，可能丢掉谁的消息，怎样改？","evidence":"整体读出再写回消息列表可能丢失并发追加"},
+    {"id":"H09","type":"paraphrase","topic":"hidden_button","question":"网页已经把不允许访问的资料按钮隐藏，为什么后端召回仍要加入组织条件？","evidence":"隐藏前端按钮不足以防越权"},
+    {"id":"H10","type":"paraphrase","topic":"chunk_checksum","question":"文件分块序号都齐了、合并后的大小也对，是否就说明内容一定正确，还能检查什么？","evidence":"还可验证哈希"},
+    {"id":"H11","type":"paraphrase","topic":"keyword_model","question":"搜索精确错误码而不是改述含义时，哪种召回更直接，评分考虑哪些因素？","evidence":"BM25 根据词频、词项稀有程度及文档长度计算相关性"},
+    {"id":"H12","type":"multi","topic":"nearest_vs_evidence","question":"把关键词和最近邻结果融合后，就能确认答案有依据吗，三个环节分别还需要考虑什么？","evidenceAnchors":["KNN 找到最近邻不代表存在足够回答问题的证据","排名融合减少原始分数尺度不同的影响","非空列表不等于有证据"]},
+    {"id":"H13","type":"absent","topic":"Raft","question":"Raft 的选举计时器和日志匹配性质怎么实现？","evidence":"No Raft election or log matching evidence in the source."},
+    {"id":"H14","type":"absent","topic":"HNSW_parameters","question":"这份资料里 ES 的 HNSW m 和 ef_construction 各是多少？","evidence":"No HNSW construction parameters specified by the source."},
+    {"id":"H15","type":"absent","topic":"TLS","question":"TLS 1.3 的 0-RTT 如何防范重放攻击？","evidence":"No TLS 0-RTT evidence in the source."},
+    {"id":"H16","type":"absent","topic":"IK_actual_tokens","question":"这份资料明确列出的 ik_max_word 对缓存击穿的实际分词结果是什么？","evidence":"The source mentions IK but never gives this exact tokenization output."}
+  ]
+}

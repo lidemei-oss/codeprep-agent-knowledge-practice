@@ -1,0 +1,24 @@
+{
+  "documentId": "1f6489b5-28be-41fe-97c9-4e513f1f2057",
+  "sourceSha256": "16ea91e2d310d3727c7491ef9cc10d33108775bf127db73c9f2536542478022d",
+  "scope": {
+    "category": "rag-benchmark-20261014",
+    "orgTag": "rag-benchmark",
+    "groupName": "独立召回评测"
+  },
+  "httpReturnStatus": "PROCESSING",
+  "uploadHttpMs": 31.34590000000001,
+  "submittedAt": 1791973865.2598784,
+  "document": {
+    "id": "1f6489b5-28be-41fe-97c9-4e513f1f2057",
+    "title": "rag-benchmark-java.md",
+    "category": "rag-benchmark-20261014",
+    "orgTag": "rag-benchmark",
+    "status": "READY",
+    "fileName": "rag-benchmark-java.md",
+    "createdAt": "2026-10-14T10:31:05.250Z",
+    "chunkCount": 29,
+    "groupName": "独立召回评测"
+  },
+  "readyObservedAfterSeconds": 33.2063353061676
+}

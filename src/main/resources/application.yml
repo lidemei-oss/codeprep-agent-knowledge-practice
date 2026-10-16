@@ -1,0 +1,119 @@
+server:
+  port: 8083
+  address: 127.0.0.1
+spring:
+  config:
+    import: optional:file:.env[.properties]
+  application:
+    name: codeprep-agent
+  datasource:
+    url: ${MYSQL_URL:jdbc:mysql://127.0.0.1:3307/codeprep?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai}
+    username: ${MYSQL_USER:root}
+    password: ${MYSQL_PASSWORD:1234}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:schema.sql
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 60MB
+  data:
+    redis:
+      host: ${REDIS_HOST:127.0.0.1}
+      port: ${REDIS_PORT:6379}
+  rabbitmq:
+    host: ${RABBITMQ_HOST:127.0.0.1}
+    port: ${RABBITMQ_PORT:5672}
+    username: ${RABBITMQ_USER:codeprep}
+    password: ${RABBITMQ_PASSWORD:codeprep}
+    publisher-confirm-type: correlated
+    publisher-returns: true
+    template:
+      mandatory: true
+    listener:
+      simple:
+        acknowledge-mode: manual
+        prefetch: 2
+        concurrency: 1
+        max-concurrency: 2
+  jackson:
+    default-property-inclusion: non_null
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+management:
+  health:
+    elasticsearch:
+      enabled: ${CODEPREP_ELASTICSEARCH_ENABLED:true}
+    redis:
+      enabled: ${CODEPREP_REDIS_ENABLED:true}
+    rabbit:
+      enabled: ${CODEPREP_RABBITMQ_ENABLED:true}
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+codeprep:
+  knowledge:
+    metadata-file: ${CODEPREP_METADATA_FILE:./data/documents.json}
+  redis:
+    enabled: ${CODEPREP_REDIS_ENABLED:true}
+  security:
+    jwt-secret: ${CODEPREP_JWT_SECRET:change-this-secret-to-at-least-32-bytes-long}
+    token-ttl-hours: 12
+  elasticsearch:
+    enabled: ${CODEPREP_ELASTICSEARCH_ENABLED:true}
+    url: ${ELASTICSEARCH_URL:http://127.0.0.1:9200}
+    index: ${ELASTICSEARCH_INDEX:codeprep_knowledge_chunk}
+    vector-dimension: 2048
+    top-k: 8
+    candidate-k: 40
+  embedding:
+    enabled: ${CODEPREP_EMBEDDING_ENABLED:true}
+    base-url: ${QWEN_EMBEDDING_BASE_URL:http://127.0.0.1:11434/v1}
+    api-key: ${QWEN_EMBEDDING_API_KEY:}
+    model: ${QWEN_EMBEDDING_MODEL:Qwen3-Embedding-4B}
+    dimension: 2048
+  llm:
+    enabled: ${CODEPREP_LLM_ENABLED:true}
+    base-url: ${DEEPSEEK_BASE_URL:https://api.deepseek.com}
+    api-key: ${DEEPSEEK_API_KEY:}
+    model: ${DEEPSEEK_MODEL:deepseek-chat}
+    temperature: 0.2
+  rabbitmq:
+    enabled: ${CODEPREP_RABBITMQ_ENABLED:true}
+    exchange: ${CODEPREP_RABBITMQ_EXCHANGE:codeprep.document.exchange}
+    routing-key: ${CODEPREP_RABBITMQ_ROUTING_KEY:codeprep.document.ingest}
+    queue: ${CODEPREP_RABBITMQ_QUEUE:codeprep.document.ingest}
+    dead-letter-exchange: ${CODEPREP_RABBITMQ_DLX:codeprep.document.dlx}
+    dead-letter-routing-key: ${CODEPREP_RABBITMQ_DLQ_ROUTING_KEY:codeprep.document.failed}
+    dead-letter-queue: ${CODEPREP_RABBITMQ_DLQ:codeprep.document.failed}
+    max-attempts: ${CODEPREP_RABBITMQ_MAX_ATTEMPTS:3}
+    outbox:
+      poll-ms: ${CODEPREP_OUTBOX_POLL_MS:2000}
+      initial-delay-ms: ${CODEPREP_OUTBOX_INITIAL_DELAY_MS:1000}
+      lease-ms: ${CODEPREP_OUTBOX_LEASE_MS:30000}
+      retry-base-ms: ${CODEPREP_OUTBOX_RETRY_BASE_MS:1000}
+      retry-max-ms: ${CODEPREP_OUTBOX_RETRY_MAX_MS:300000}
+      reconcile-ms: ${CODEPREP_OUTBOX_RECONCILE_MS:60000}
+      stale-ms: ${CODEPREP_OUTBOX_STALE_MS:1800000}
+  web-search:
+    enabled: ${CODEPREP_WEB_SEARCH_ENABLED:true}
+    base-url: ${TAVILY_BASE_URL:https://api.tavily.com}
+    api-key: ${TAVILY_API_KEY:}
+    max-results: 5
+  upload:
+    directory: ${CODEPREP_UPLOAD_DIR:./data/uploads}
+    chunk-size: 5242880
+  rag:
+    chunk-max-tokens: 700
+    chunk-min-tokens: 160
+    chunk-overlap-tokens: 80
+    max-context-chars: 12000
+    cache-seconds: 120
+    evidence:
+      timeout-ms: ${CODEPREP_EVIDENCE_TIMEOUT_MS:30000}
+      max-selected: ${CODEPREP_EVIDENCE_MAX_SELECTED:5}
+      max-candidate-chars: ${CODEPREP_EVIDENCE_MAX_CANDIDATE_CHARS:20000}

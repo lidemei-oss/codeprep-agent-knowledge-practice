@@ -1,0 +1,33 @@
+{
+  "automatedTests": {
+    "classes": 26,
+    "tests": 77,
+    "skipped": 2,
+    "failures": 0,
+    "errors": 0
+  },
+  "requestMode": "bounded-json-v1",
+  "liveQualityVerified": false,
+  "smokeResults": [
+    {
+      "id": "Q22",
+      "status": "ERROR",
+      "reason": "MODEL_TIMEOUT",
+      "selectedCount": 0
+    },
+    {
+      "id": "M03",
+      "status": "ERROR",
+      "reason": "MODEL_TIMEOUT",
+      "selectedCount": 0
+    },
+    {
+      "id": "N04",
+      "status": "ERROR",
+      "reason": "MODEL_HTTP_503",
+      "selectedCount": 0
+    }
+  ],
+  "legacyRecordedCases": 63,
+  "legacyErrors": 16
+}
