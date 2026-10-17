@@ -55,3 +55,6 @@ python -m http.server 5500 --bind 127.0.0.1
 ## 当前边界
 
 这是可运行的学习型 Agent 骨架：Controller → Service → MyBatis-Plus Mapper 分层负责关系型数据；ES、Redis、RabbitMQ 由独立网关/组件负责。账号、文档、Outbox 待投递任务、刷题记录和 Agent 轨迹现可跨重启读取；上传分片进行中的临时状态仍在进程内，重启后不能续传同一 uploadId。已有 H2/MyBatis-Plus 持久化、Outbox 原子提交与重试、文档领取竞争、规划、零召回、组织标签权限和 HTTP 流程的自动化测试；真实 MySQL 与 RabbitMQ/ES/模型全链路仍需按本机服务状态验证。生产部署仍需补充正式账号管理、密钥管理、审计日志、通用数据库版本迁移、消费者停滞监控、跨 MySQL/ES/RabbitMQ 的补偿和多实例 WebSocket 广播。
+
+
+本项目将持续更新和完善。
